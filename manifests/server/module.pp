@@ -1,7 +1,7 @@
 # See README.md for details.
 define openldap::server::module(
-  $ensure = undef,
-  $modulepath,
+  $ensure     = undef,
+  $modulepath = $::openldap::server::modulepath,
 ) {
 
   if ! defined(Class['openldap::server']) {
@@ -20,7 +20,7 @@ define openldap::server::module(
 
   openldap_module { $title:
     ensure     => $ensure,
-    modulepath => $::openldap::server::modulepath,
+    modulepath => $modulepath,
     provider   => $::openldap::server::provider,
   }
 }
