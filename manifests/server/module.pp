@@ -1,6 +1,7 @@
 # See README.md for details.
 define openldap::server::module(
   $ensure = undef,
+  $modulepath,
 ) {
 
   if ! defined(Class['openldap::server']) {
