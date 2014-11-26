@@ -47,9 +47,13 @@ Puppet::Type.type(:openldap_module).provide(:olc) do
 
   def create
     t = Tempfile.new('openldap_module')
-    t << "dn: cn=module{0},cn=config\n"
-    t << "add: olcModuleLoad\n"
+    t << "dn: cn=module,cn=config\n"
+    t << "changetype: add\n"
+    t << "cn: module\n"
+    t << "objectClass: olcModuleList\n"
+    t << "objectClass: top\n"
     t << "olcModuleLoad: #{resource[:name]}.la\n"
+    t << "olcModulePath: #{resource[:modulepath]}\n"
     t.close
     Puppet.debug(IO.read t.path)
     begin

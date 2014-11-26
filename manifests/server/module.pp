@@ -18,7 +18,8 @@ define openldap::server::module(
   }
 
   openldap_module { $title:
-    ensure   => $ensure,
-    provider => $::openldap::server::provider,
+    ensure     => $ensure,
+    modulepath => $::openldap::server::modulepath,
+    provider   => $::openldap::server::provider,
   }
 }

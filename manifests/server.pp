@@ -17,6 +17,7 @@ class openldap::server(
     RedHat => $::operatingsystemmajrelease ? {
       5 => 'ldap',
       6 => 'slapd',
+      7 => 'slapd',
     },
   },
   $service_hasstatus = $::osfamily ? {
@@ -33,6 +34,11 @@ class openldap::server(
   $group     = $::osfamily ? {
     Debian => 'openldap',
     RedHat => 'ldap',
+  },
+
+  $modulepath = $::osfamily ? {
+    RedHat  => '/usr/lib64/openldap',
+    Debian => '/usr/lib/ldap',
   },
 
   $enable    = true,
