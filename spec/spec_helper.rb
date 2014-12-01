@@ -1,4 +1,9 @@
 require 'puppetlabs_spec_helper/module_spec_helper'
+require 'puppet_facts'
+include PuppetFacts
+
+ENV['UNIT_TEST_PLATFORMS'] = 'debian-7-x86_64'
+
 
 RSpec.configure do |c|
   c.include PuppetlabsSpec::Files
@@ -18,7 +23,7 @@ RSpec.configure do |c|
       Puppet.settings[:strict_variables]=true
     end
 
-    if ENV['PUPPET_PARSER'] == 'future'
+    if ENV['FUTURE_PARSER'] == 'yes'
       c.parser='future'
     end
   end
